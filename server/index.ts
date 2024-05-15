@@ -245,7 +245,7 @@ export const getPosts = async (): Promise<PostMeta[]> => {
 	)
 	const build = await getBuild()
 	const posts = Object.entries(modules).map(([file, post]) => {
-		let id = file.replace('../', '').replace(/\.mdx$/, '')
+		let id = file.replace('../app/', '').replace(/\.mdx$/, '')
 		let slug = build.routes[id].path
 		if (slug === undefined) throw new Error(`No route for ${id}`)
 
