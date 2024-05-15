@@ -1,6 +1,10 @@
+import mdx from '@mdx-js/rollup'
 import { vitePlugin as remix } from '@remix-run/dev'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { glob } from 'glob'
+import rehypePrettyCode from 'rehype-pretty-code'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { flatRoutes } from 'remix-flat-routes'
 import { defineConfig } from 'vite'
 
@@ -23,6 +27,10 @@ export default defineConfig({
 		sourcemap: true,
 	},
 	plugins: [
+		mdx({
+			remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+			rehypePlugins: [rehypePrettyCode],
+		}),
 		remix({
 			ignoredRouteFiles: ['**/*'],
 			serverModuleFormat: 'esm',
